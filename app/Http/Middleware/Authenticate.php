@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class Authenticate extends Middleware
 {
@@ -15,6 +17,16 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
+
+            $uri = $request->path();
+
+            // URIが以下３つから始まる場合
+            if(Str::startsWith($uri, ['administrators/'])) {
+
+                return 'multi_login';
+
+            }
+
             return route('login');
         }
     }

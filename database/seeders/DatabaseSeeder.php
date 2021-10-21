@@ -9,6 +9,7 @@ class DatabaseSeeder extends Seeder
        $this->call(RestdataTableSeeder::class);
        $this->call(ProductTableSeeder::class);
        $this->call(CartTableSeeder::class);
+       $this->call(MultiAuthTableSeeder::class);
    }
 }
 

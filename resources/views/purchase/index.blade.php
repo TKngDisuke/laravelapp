@@ -12,7 +12,7 @@
                            
                            <div class="col-xs-6 col-sm-4 col-md-4 ">
                                <div class="mycart_box">
-                                注文ID{{$item->id}}<br>
+                                注文ID{{$item->purchase_id}}<br>
                                    {{$item->name}} <br>
                                    {{$item->price}}円<br>
                                    注文パスワード{{$item->password}}<br>

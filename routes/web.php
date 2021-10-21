@@ -10,6 +10,7 @@ use App\Http\Controllers\RestappController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\MultiAuthController;
 use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Thanks;
@@ -104,4 +105,19 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::get('scss', function () {
     return view('for-scss');
+});
+
+
+
+Route::get('multi_login', [MultiAuthController::class, 'showLoginForm']);
+Route::post('multi_login', [MultiAuthController::class, 'login']);
+
+// ログアウト
+Route::get('multi_login/logout', [MultiAuthController::class, 'logout']);
+
+// ログイン後のページ
+Route::prefix('administrators')->middleware('auth:administrators')->group(function(){
+
+Route::get('dashboard', function(){ return '管理者でログイン完了'; });
+Route::get('home', [MultiAuthController::class, 'index']);
 });

@@ -15,6 +15,8 @@
                                    {{$product->name}} <br>
                                    {{$product->price}}円<br>
                                    {{$product->type}}タイプ<br>
+                                   <a href="http://127.0.0.1:8000/image/edit?id={{$product->id}}">編集</a>
+                                   <a href="http://127.0.0.1:8000/image/del?id={{$product->id}}">削除</a>
                                    @if(file_exists(public_path().$product->image))
                                    <img src="{{$product->image}}"alt="" class="incart">
                                    @endif
