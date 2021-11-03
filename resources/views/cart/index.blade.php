@@ -26,9 +26,17 @@
          <div class="mycart_box">
             {{$my_cart->product->name}} <br>                                
             {{ number_format($my_cart->product->price)}}円 <br>
+            {{$my_cart->count}}個 <br>     
             @if(file_exists(public_path().$my_cart->product->image))
             <img src="{{$my_cart->product->image}}"alt="" class="incart">
             @endif
+            <br>
+            <form action="shop" method="post">
+               @csrf
+               <input type="hidden" name="stock_id" value="{{ $my_cart->product->id }}">
+               <input type="submit" value="カートにもう一個追加">
+           </form>
+                 <br>
                  <br>
                  
                  <form action="shop/cartdel" method="post">
@@ -50,7 +58,7 @@
   <p class="text-center">カートはからっぽです。</p>
 @endif
   
-<a href="{{ url('/image/shop') }}">商品一覧へ</a>
+<a href="{{ url('./image/shop') }}">商品一覧へ</a>
          </div>
       </div>
    </table>

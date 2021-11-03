@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Mail; //追記
 use App\Mail\Thanks;//追記
 use Illuminate\Http\Request;
 use App\Models\Cart;
+use App\Models\Store;
 use App\Models\Purchasehistory;
 use App\Models\Product;
 use Validator;
@@ -21,6 +22,12 @@ class CartController extends Controller
         $data = $cart->showCart();
         return view('cart.index',$data);
     }
+    public function store(Store $store)
+    {
+        $data = $store->showStore();
+        return view('cart.store',$data);
+    }
+
 
     public function addMycart(Request $request,Cart $cart)
     {
@@ -56,9 +63,11 @@ class CartController extends Controller
        $mail_data['checkout_items']=$cart->checkout2Cart(); //編集（カート削除してない）
        Mail::to($user->email)->send(new Thanks($mail_data));//編集
        $data['a']=$cart->checkoutCart(); //カート内の削除もしてデータを格納
-       $pas2=$purchasehistory->art($data['a']);
-       //ここでpurchaseにデータを入れる
-       return view('cart.checkout',$pas2);
+          //cart,checkout_itemsのpriceを取ってsumに
 
+       $pas2=$purchasehistory->art($data['a']);
+       //ここでpurchaseにcartのデータを入れる
+       return view('cart.checkout',$pas2);
+        //合計金額の処理
    }
 }

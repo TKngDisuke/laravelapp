@@ -8,7 +8,7 @@
    </div>
    @endif
    <table>
-        <form method="post" action="/store/form" > 
+        <form method="post" action="/owner/store/form" > 
         @csrf
         <tr><th>name:
             </th><td><input type="text" name="name"></td></tr>
@@ -29,5 +29,5 @@
             <input type="submit" class="submitbtn">
    </form>
    </table>
-   <a href="http://127.0.0.1:8000/store">商品を見る</a>
+   <a href="./">店舗一覧を見る</a>
    

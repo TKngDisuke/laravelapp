@@ -8,7 +8,7 @@
    </div>
    @endif
    <table>
-        <form method="post" action="/image/form" enctype="multipart/form-data"> 
+        <form method="post" action="/owner/image/form" enctype="multipart/form-data"> 
         @csrf
         <tr><th>name:
             </th><td><input type="text" name="name"></td></tr>
@@ -23,5 +23,5 @@
             <input type="submit" class="submitbtn">
    </form>
    </table>
-   <a href="http://127.0.0.1:8000/image">商品を見る</a>
+   <a href="./index">商品を見る</a>
    

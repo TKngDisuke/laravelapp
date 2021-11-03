@@ -35,10 +35,10 @@ class ProductController extends Controller
             if($request->image->extension() == 'gif' || $request->image->extension() == 'jpeg' || $request->image->extension() == 'jpg' || $request->image->extension() == 'png'){
             $request->file('image')->storeAs('public/post_img', $a.'.'.$request->image->extension());
             }
+            $product->image='/storage/post_img/'.$a.'.'.$request->image->extension();
         }
-        $product->image='/storage/post_img/'.$a.'.'.$request->image->extension();
 $product->save();
-        return redirect ('/image/form');
+        return redirect ('owner/image/index');
     }
  public function edit(Request $request)
  {
@@ -56,11 +56,17 @@ $product->save();
     if($request->image){
         if($request->image->extension() == 'gif' || $request->image->extension() == 'jpeg' || $request->image->extension() == 'jpg' || $request->image->extension() == 'png'){
         $request->file('image')->storeAs('public/post_img', $a.'.'.$request->image->extension());
+        $product->image='/storage/post_img/'.$a.'.'.$request->image->extension();
+        $product->save();
         }
+        
     }
-    $product->image='/storage/post_img/'.$a.'.'.$request->image->extension();
-    $product->save();
-    return redirect('/image');}
+    else{
+        $product->image=null;
+        $product->save();
+    }
+
+    return redirect('owner/image/index');}
  public function delete(Request $request)
  {
     $product = Product::find($request->id);
@@ -69,7 +75,7 @@ $product->save();
  public function remove(Request $request)
  {
     Product::find($request->id)->delete();
-    return redirect('/image');
+    return redirect('owner/image/index');
  }
 
 

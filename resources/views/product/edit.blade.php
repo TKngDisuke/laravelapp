@@ -19,7 +19,7 @@
    @endif
    <table>
 
-    <form method="post" action="/image/edit" enctype="multipart/form-data"> 
+    <form method="post" action="./edit" enctype="multipart/form-data"> 
         @csrf
        <input type="hidden" name="id" value="{{$form->id}}">
        <tr><th>name: </th><td><input type="text" name="name"

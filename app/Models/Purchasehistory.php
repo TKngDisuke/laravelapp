@@ -24,7 +24,9 @@ class Purchasehistory extends Model
         $purchasehistory->type = $item->product->type;
         $purchasehistory->password =$pass;
         $purchasehistory->purchase_id = 1+$pass_id->purchase_id;
-
+        $purchasehistory->sum=$item->sum;
+        $purchasehistory->receive=0;
+        $purchasehistory->count=$item->count;
         $purchasehistory->save();
         }
         return $pas2;
@@ -33,6 +35,17 @@ class Purchasehistory extends Model
     {
         $user_id = Auth::id();
         $data['histories'] = $this->where('user_id',$user_id)->get();
+
+        return $data;
+    }
+    public function addPurchase($a)//商品受け取り済みにする
+    {
+        $purchase_id = $a;
+        $this->where('purchase_id',$purchase_id)->update(['receive'=>'1']);
+    }
+    public function ownershowPurchase()
+    {
+        $data['histories'] = $this->get();
 
         return $data;
     }

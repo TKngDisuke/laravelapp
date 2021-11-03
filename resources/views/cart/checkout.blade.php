@@ -15,9 +15,9 @@
                 暗証番号は{{$pass}}です。</h1> 
                 商品を受け取るまではこの画面を移動しないでください。
 
-               <a href="{{ url('/image/shop') }}">商品一覧へ</a>
+               <a href="./image/shop">商品一覧へ</a>
 
-               <a href="{{ url('/shop/history') }}">購入履歴</a>
+               <a href="./shop/history">購入履歴</a>
            </div>
            </div>
        </div>

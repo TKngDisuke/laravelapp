@@ -10,6 +10,8 @@ class DatabaseSeeder extends Seeder
        $this->call(ProductTableSeeder::class);
        $this->call(CartTableSeeder::class);
        $this->call(MultiAuthTableSeeder::class);
+       $this->call(StocksTableSeeder::class);
+       $this->call(Stocks2TableSeeder::class);
    }
 }
 

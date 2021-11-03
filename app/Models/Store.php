@@ -27,6 +27,11 @@ class Store extends Model
     }
 
 
+    public function showStore()
+   {
+       $data['stores'] = $this->get();
+       return $data;
+   }
     use HasFactory;
 }
    

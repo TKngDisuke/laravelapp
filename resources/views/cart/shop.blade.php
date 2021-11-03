@@ -23,7 +23,7 @@
 
                                     {{-- 追加 --}}
 
-                                    <form action="http://127.0.0.1:8000/shop" method="post">
+                                    <form action="/shop" method="post">
                                         @csrf
                                         <input type="hidden" name="stock_id" value="{{ $product->id }}">
                                         <input type="submit" value="カートに入れる">
@@ -31,10 +31,6 @@
 
                                     {{-- ここまで --}}
                                </div>
-
-                                {{-- 追加 --}}
-                               <a class="text-center" href="/">商品一覧へ</a>
-                                {{-- ここまで --}}  
  
                            </div>
                        @endforeach                    

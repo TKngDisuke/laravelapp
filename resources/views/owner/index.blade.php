@@ -7,9 +7,11 @@
            <div class="">
                <div class="d-flex flex-row flex-wrap">
            
+<a href="./home/received">商品受け取り済</a>
+<a href="./home/not_received">商品未受け取り</a>
                        @foreach($histories as $item)
 
-                           
+                       
                            <div class="col-xs-6 col-sm-4 col-md-4 ">
                                <div class="mycart_box">
                                 注文ID{{$item->purchase_id}}<br>
@@ -17,25 +19,17 @@
                                    {{$item->name}} <br>
                                    個別金額{{$item->price}}円<br>
                                    合計金額:{{$item->sum}}円<br>
-                                   @if($item->receive==0)
-                                   <form action="./receive" method="post">
-                                    @csrf
-                                    <input type="hidden" name="id" value="{{ $item->purchase_id }}">
-                                    <input type="submit" value="商品を受け取った">
-                                </form>
-                                   @else
-                                    受け取り済み
-                                   @endif
-                                   <br>
                                    <br>
                     
                                </div>
  
                            </div>
+                         
                        @endforeach                    
                </div>
                <div class="text-center" style="width: 200px;margin: 20px auto;">
                </div>
+               
            </div>
        </div>
    </div>

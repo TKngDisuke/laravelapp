@@ -16,14 +16,14 @@
        <div class="mycart_box">
            名前:{{$store->name}} <br>
            住所:{{$store->adress}} <br>
-           営業時間:{{$store->time}}円<br>
+           営業時間:{{$store->time}}<br>
            電話番号:{{$store->phone}} <br>
            モバイルオーダー対応時間:{{$store->MOtime}} <br>
-           客席数:{{$store->audience_seat}}席数<br>
-           駐車場台数:{{$store->parking}} <br>
+           客席数:{{$store->audience_seat}}席<br>
+           駐車場台数:{{$store->parking}}台 <br>
            {{$store->others}} <br>
-           <a href="http://127.0.0.1:8000/store/edit?id={{$store->id}}">編集</a>
-           <a href="http://127.0.0.1:8000/store/del?id={{$store->id}}">削除</a>
+           <a href="./edit?id={{$store->id}}">編集</a>
+           <a href="./del?id={{$store->id}}">削除</a>
            <br>
            <br>
            <br>
@@ -37,4 +37,4 @@
 @section('footer')
 copyright 2017 tuyano.
 @endsection
-<a href="http://127.0.0.1:8000/store/form">店舗を追加する</a>
+<a href="./form">店舗を追加する</a>

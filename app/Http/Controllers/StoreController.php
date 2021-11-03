@@ -33,7 +33,7 @@ class StoreController extends Controller
         $store->parking =$request->parking;        
         $store->others =$request->others;
         $store->save();
-        return redirect ('/store/form');
+        return redirect ('owner/store/form');
     }
  public function edit(Request $request)
  {
@@ -53,7 +53,7 @@ class StoreController extends Controller
     $store->parking =$request->parking;        
     $store->others =$request->others;
     $store->save();
-    return redirect('/store');}
+    return redirect('owner/store');}
  public function delete(Request $request)
  {
     $store = Store::find($request->id);
@@ -62,7 +62,7 @@ class StoreController extends Controller
  public function remove(Request $request)
  {
     Store::find($request->id)->delete();
-    return redirect('/store');
+    return redirect('ower/store');
  }
 
  public function receive(Purchasehistory $purchasehistory)

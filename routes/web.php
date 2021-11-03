@@ -11,6 +11,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\MultiAuthController;
+use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Thanks;
@@ -35,6 +36,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('image/shop', [ProductController::class,'shop']);
     Route::get('shop', [CartController::class,'mycart']);
+    Route::get('store', [CartController::class,'store']);
     Route::post('shop', [CartController::class,'addmycart']);
     Route::get('shop/form', [CartController::class,'form']);
     Route::post('shop/form', [CartController::class,'shop']);
@@ -44,34 +46,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('shop/cartdel', [CartController::class,'delete']);
     Route::post('shop/cartdel', [CartController::class,'remove']);
     Route::get('shop/history', [PurchasehistoryController::class,'index']);//購入履歴
+    Route::post('shop/receive', [PurchasehistoryController::class,'receive']);//商品の受け取り
 
 });
-
-
-
-Route::get('image/index', [ProductController::class,'index']);
-Route::get('image/form', [ProductController::class,'form']);
-Route::post('image/form', [ProductController::class,'store'])->name('image.store');
-Route::get('image/edit', [ProductController::class,'edit']);
-Route::post('image/edit', [ProductController::class,'update']);
-Route::get('image/del', [ProductController::class,'delete']);
-Route::post('image/del', [ProductController::class,'remove']);
-
-Route::group(['middleware' => ['auth']], function () {
-Route::get('store', [StoreController::class,'index']);
-Route::get('store/form', [StoreController::class,'form']);
-Route::post('store/form', [StoreController::class,'store'])->name('store.store');
-Route::get('store/edit', [StoreController::class,'edit']);
-Route::post('store/edit', [StoreController::class,'update']);
-Route::get('store/del', [StoreController::class,'delete']);
-Route::post('store/del', [StoreController::class,'remove']);
-Route::get('store/control', [StoreController::class,'control']);//storeのMO管理画面、商品購入メッセージ表示
-Route::get('store/receive', [StoreController::class,'receive']);//storeの何を作って欲しいかのデータ表示
-});
-
-
-
-
 
 Route::get('hello/rest', [HelloController::class,'rest']);
 Route::resource('rest', RestappController::class);
@@ -109,15 +86,28 @@ Route::get('scss', function () {
 
 
 
-Route::get('multi_login', [MultiAuthController::class, 'showLoginForm']);
-Route::post('multi_login', [MultiAuthController::class, 'login']);
 
-// ログアウト
-Route::get('multi_login/logout', [MultiAuthController::class, 'logout']);
+Route::group(['prefix' => 'owner', 'middleware' => 'owner_auth'], function () {//店舗のオーナー側
 
-// ログイン後のページ
-Route::prefix('administrators')->middleware('auth:administrators')->group(function(){
+    Route::get('home', [OwnerController::class,'index']);
+    Route::get('home/received', [OwnerController::class,'received']);
+    Route::get('home/not_received', [OwnerController::class,'notreceived']);
 
-Route::get('dashboard', function(){ return '管理者でログイン完了'; });
-Route::get('home', [MultiAuthController::class, 'index']);
+    Route::get('image/index', [ProductController::class,'index']);//商品のCRUD
+    Route::get('image/form', [ProductController::class,'form']);
+    Route::post('image/form', [ProductController::class,'store'])->name('image.store');
+    Route::get('image/edit', [ProductController::class,'edit']);
+    Route::post('image/edit', [ProductController::class,'update']);
+    Route::get('image/del', [ProductController::class,'delete']);
+    Route::post('image/del', [ProductController::class,'remove']);
+
+    Route::get('store', [StoreController::class,'index']);//店舗情報のCRUD
+    Route::get('store/form', [StoreController::class,'form']);
+    Route::post('store/form', [StoreController::class,'store'])->name('store.store');
+    Route::get('store/edit', [StoreController::class,'edit']);
+    Route::post('store/edit', [StoreController::class,'update']);       
+    Route::get('store/del', [StoreController::class,'delete']);
+    Route::post('store/del', [StoreController::class,'remove']);
+    Route::get('store/control', [StoreController::class,'control']);//storeのMO管理画面、商品購入メッセージ表示
+    Route::get('store/receive', [StoreController::class,'receive']);//storeの何を作って欲しいかのデータ表示
 });
